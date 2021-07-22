@@ -1,4 +1,3 @@
-// import colors from 'vuetify/es5/util/colors'
 import colors from 'vuetify/lib/util/colors'
 
 export default {
@@ -16,8 +15,10 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap' }
+    ],
+
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -46,6 +47,8 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
+    defaultAssets: false,
     theme: {
       dark: false,
       themes: {
@@ -58,7 +61,7 @@ export default {
           error: colors.deepOrange.accent4,
           success: colors.green.accent3
         }
-      }
+      },  
     }
   },
 

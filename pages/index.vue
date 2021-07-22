@@ -1,5 +1,5 @@
 <template>
-  <v-row> </v-row>
+  <v-main>hi <span>안녕하세요.</span></v-main>
 </template>
 <script>
 export default {
