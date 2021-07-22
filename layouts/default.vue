@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-navigation-drawer app>
-      <v-list-item>
+      <v-list-item height="200px">
         <v-list-item-content>
           <v-list-item-title class="ma-4 text-h5 font-weight-bold">
             ALLMAN.git
