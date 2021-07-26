@@ -1,39 +1,54 @@
 <template>
   <v-app>
     <v-navigation-drawer app class="b">
-      <v-list-item height="200px">
-        <v-list-item-content>
-          <v-list-item-title
-            class="ma-3 pa-2 text-h5 font-weight-bold text-center"
-          >
-            ALLMAN.git
-          </v-list-item-title>
-          <v-list-item-subtitle class="text-h8 font-weight-bold text-center">
-            FRONT-END DEVELOPER
-          </v-list-item-subtitle>
-          <v-list-item-subtitle class="mb-4 text-center">
-            SINCE 2021.07.22
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-
-      <v-divider></v-divider>
-      <v-list-item class="grey lighten-3">
-        <v-list-item-icon>
-          <v-icon class="text-center">{{ svgPath }}</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content class="py-0">
-          <v-list-item class="text-subtitle-2">
-            <span class="px-2 my-0 text-grey">TODAY: 00</span>
+      <v-container>
+        <v-row>
+          <v-list-item height="200px">
+            <v-list-item-content>
+              <v-list-item-title
+                class="ma-3 pa-2 text-h5 font-weight-bold text-center"
+              >
+                ALLMAN.git
+              </v-list-item-title>
+              <v-list-item-subtitle
+                class="text-h8 font-weight-bold text-center"
+              >
+                FRONT-END DEVELOPER
+              </v-list-item-subtitle>
+              <v-list-item-subtitle class="mb-4 text-center">
+                SINCE 2021.07.22
+              </v-list-item-subtitle>
+            </v-list-item-content>
           </v-list-item>
-          <v-list-item class="text-subtitle-2">
-            <span class="px-2 my-0 text-grey">TOTAL: 00</span>
+
+          <v-divider></v-divider>
+        </v-row>
+
+        <v-row>
+          <v-list-item class="grey lighten-3">
+            <v-list-item-icon>
+              <v-icon class="text-center">{{ svgPath }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content class="py-0">
+              <v-list-item class="text-subtitle-2">
+                <span class="px-2 my-0 text-grey">TODAY: 00</span>
+              </v-list-item>
+              <v-list-item class="text-subtitle-2">
+                <span class="px-2 my-0 text-grey">TOTAL: 00</span>
+              </v-list-item>
+            </v-list-item-content>
           </v-list-item>
-        </v-list-item-content>
-      </v-list-item>
-      <v-divider class="mt-4"></v-divider>
-      <v-treeview :items="items" open-on-click></v-treeview>
+          <v-divider class="mt-4"></v-divider>
+          <v-treeview :items="items" open-on-click></v-treeview>
+        </v-row>
+      </v-container>
+
+      <v-footer absolute class="justify-center pl-0">
+        <v-btn left class="mr-1 text--white" color="primary ma-4 pa-6">
+          Send Email</v-btn
+        >
+      </v-footer>
     </v-navigation-drawer>
     <v-main>
       <nuxt></nuxt>
