@@ -1,9 +1,9 @@
  <template>
   <v-container>
     <v-container>
-      <v-row justify="space-between">
+      <v-row dense justify="space-between">
         <v-col cols="auto">
-          <v-card-title class="d-flex text-h4 font-weight-bold"
+          <v-card-title class="d-flex text-h4 font-weight-bold pa-0"
             >DEV 트레이닝</v-card-title
           > </v-col
         ><v-col cols="auto" align-self="center">

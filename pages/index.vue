@@ -22,7 +22,7 @@
       <!-- dev트레이닝 시트 -->
       <dev-training></dev-training>
     </v-sheet>
-    <v-sheet -sheet outlined class="mt-12">
+    <v-sheet outlined class="mt-12">
       <!-- 이슈 시트 -->
       <issue-record> </issue-record>
     </v-sheet>

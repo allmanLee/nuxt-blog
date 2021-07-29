@@ -1,10 +1,15 @@
 import colors from 'vuetify/lib/util/colors'
 
 export default {
+
+  target: 'static',
+  router: {
+    base: '/allman-dev/'
+  },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - allman-blog',
-    title: 'allman-blog',
+    titleTemplate: '%s - allman-dev',
+    title: 'allman-dev',
     htmlAttrs: {
       lang: 'en'
     },
@@ -42,8 +47,11 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxt/content'
   ],
-
+  content: {
+    // Options
+  },
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
