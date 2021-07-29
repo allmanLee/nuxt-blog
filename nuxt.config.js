@@ -1,7 +1,7 @@
 import colors from 'vuetify/lib/util/colors'
 
 export default {
-
+  mode: 'universal',
   target: 'static',
   router: {
     base: '/allman-dev/'

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-navigation-drawer app class="b">
+    <v-navigation-drawer fixed app class="b">
       <v-container>
         <v-row>
           <v-list-item height="200px">
