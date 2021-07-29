@@ -1,10 +1,10 @@
 import colors from 'vuetify/lib/util/colors'
 
 export default {
-  mode: 'universal',
+  ssr: true,
   target: 'static',
   router: {
-    base: '/allman-dev/'
+    base: '/nuxt-blog/'
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
