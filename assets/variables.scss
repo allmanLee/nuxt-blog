@@ -2,7 +2,7 @@
 //
 // The variables you want to modify
 // $font-size-root: 20px;
-
+@import './reset.scss';
 
 $body-font-family: 'Noto Sans KR';
 
@@ -18,4 +18,5 @@ $body-font-family: 'Noto Sans KR';
 .v-responsive__content {
     overflow-y: scroll;
 }
+
 @import '~vuetify/src/styles/styles.sass';

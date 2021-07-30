@@ -37,7 +37,13 @@
           <v-subheader>메뉴</v-subheader>
           <v-list-item>
             <v-list-item-content>
-              <v-list-item-title v-text="'DEV 트레이닝'"></v-list-item-title>
+              <nuxt-link
+                to="DevTrainingPage"
+                class="nuxt-link"
+                active-class="deep-purple--text"
+              >
+                <v-list-item-title v-text="'DEV 트레이닝'"></v-list-item-title>
+              </nuxt-link>
             </v-list-item-content>
           </v-list-item>
 
@@ -46,7 +52,7 @@
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-title>ABOUT</v-list-item-title>
+            <v-list-item-title>About</v-list-item-title>
           </v-list-item>
 
           <v-list-item>
@@ -87,7 +93,7 @@
           >
         </v-row>
       </v-container>
-      <nuxt></nuxt>
+      <Nuxt></Nuxt>
     </v-main>
   </v-app>
 </template>
@@ -104,6 +110,10 @@ export default {
 }
 </script>
 <style scoped>
+.nuxt-link {
+  text-decoration: none;
+  color: black;
+}
 .b {
   display: relative;
 }
@@ -114,5 +124,8 @@ export default {
 .scrollable {
   height: 100%;
   scrollbar-width: 6px;
+}
+.nuxt-link-active {
+  color: purple;
 }
 </style>
