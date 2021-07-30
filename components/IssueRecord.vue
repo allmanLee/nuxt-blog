@@ -3,10 +3,10 @@
     <v-container>
       <v-row dense justify="space-between">
         <v-col cols="auto">
-          <v-card-title class="d-flex text-h4 font-weight-bold pa-0"
+          <v-card-title class="d-flex text-sm-h5 text-h6 font-weight-bold pa-0"
             >이슈기록</v-card-title
           > </v-col
-        ><v-col cols="auto" align-self="center">
+        ><v-col class="d-none d-sm-flex" cols="auto" align-self="center">
           <v-btn icon
             ><v-icon large color="black">{{ svgPath }}</v-icon></v-btn
           ></v-col

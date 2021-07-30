@@ -5,23 +5,41 @@
         <v-row id="issueHeader" class="font-weight-bold">
           <v-col cols="6"> Title </v-col>
 
-          <v-col cols="3"> Project </v-col>
-          <v-col class="text-center"> Recommend</v-col>
+          <v-col cols="3" class="d-none d-sm-flex"> Project </v-col>
+          <v-col class="justify-center d-none d-sm-flex"> Recommend</v-col>
         </v-row>
         <v-row dense><v-divider></v-divider></v-row>
-        <v-row class="issueTableRow" align="center">
+        <v-row
+          class="issueTableRow"
+          align="center"
+          :justify="
+            $vuetify.breakpoint.name === 'xs' ? 'space-between' : 'start'
+          "
+        >
           <v-col cols="6"> slot 문제 발생</v-col>
-          <v-col cols="3"> nuxt-blog </v-col>
-          <v-col class="text-center">
+          <v-col class="d-none d-sm-flex" cols="3"> nuxt-blog </v-col>
+          <v-col
+            :cols="$vuetify.breakpoint.name === 'xs' ? 'auto' : ''"
+            class="text-center"
+          >
             <v-btn icon>
               <v-icon dark>{{ icons.heartOutline }}</v-icon>
             </v-btn>
           </v-col>
         </v-row>
-        <v-row class="issueTableRow" align="center">
+        <v-row
+          class="issueTableRow"
+          align="center"
+          :justify="
+            $vuetify.breakpoint.name === 'xs' ? 'space-between' : 'start'
+          "
+        >
           <v-col cols="6"> slot 문제 발생</v-col>
-          <v-col cols="3"> nuxt-blog </v-col>
-          <v-col class="text-center">
+          <v-col class="d-none d-sm-flex" cols="3"> nuxt-blog </v-col>
+          <v-col
+            :cols="$vuetify.breakpoint.name === 'xs' ? 'auto' : ''"
+            class="text-center"
+          >
             <v-btn icon>
               <v-icon dark>{{ icons.heartOutline }}</v-icon>
             </v-btn>
