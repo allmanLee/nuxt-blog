@@ -1,6 +1,43 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" fixed dark app>
+    <v-app-bar elevate-on-scroll height="60px" color="white" app>
+      <v-container>
+        <v-row justify="end" align="center">
+          <v-col>
+            <v-app-bar-nav-icon
+              v-if="$vuetify.breakpoint.name !== 'lg'"
+              @click="drawer = true"
+            ></v-app-bar-nav-icon
+          ></v-col>
+          <v-col cols="5" class="align-start">
+            <v-text-field
+              class="ma-4"
+              label="검색어를 입력해주세요."
+              single-line
+              :append-icon="searchIcon"
+              hide-details="true"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+            <v-btn large text
+              ><v-icon class="mr-2">{{ BookOpenVariant }}</v-icon> DEV
+              트레이닝</v-btn
+            >
+          </v-col>
+
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+            <v-btn large text class="font-weight-light">My ISSUE</v-btn>
+          </v-col>
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+            <v-btn large text class="font-weight-light"> PORTFOLIO</v-btn>
+          </v-col>
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+            <v-btn large text class="font-weight-light"> ABOUT</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-app-bar>
+    <v-navigation-drawer temporary fixed v-model="drawer" width="300" app>
       <v-list-item height="200px">
         <v-list-item-content class="my-xs-4,my-12">
           <v-list-item-title class="ma-3 pa-2 text-h5 text-center">
@@ -25,22 +62,30 @@
           <v-subheader>메뉴</v-subheader>
           <v-list-item href="DevTrainingPage" nuxt>
             <v-list-item-content>
-              <v-list-item-title>DEV트레이닝</v-list-item-title>
+              <v-list-item-title class="font-weight-blod"
+                >DEV트레이닝</v-list-item-title
+              >
             </v-list-item-content>
           </v-list-item>
           <v-list-item href="DevTrainingPage" nuxt>
             <v-list-item-content>
-              <v-list-item-title>DEV트레이닝</v-list-item-title>
+              <v-list-item-title class="font-weight-blod"
+                >DEV트레이닝</v-list-item-title
+              >
             </v-list-item-content>
           </v-list-item>
           <v-list-item href="DevTrainingPage" nuxt>
             <v-list-item-content>
-              <v-list-item-title>DEV트레이닝</v-list-item-title>
+              <v-list-item-title class="font-weight-blod"
+                >DEV트레이닝</v-list-item-title
+              >
             </v-list-item-content>
           </v-list-item>
           <v-list-item href="DevTrainingPage" nuxt>
             <v-list-item-content>
-              <v-list-item-title>DEV트레이닝</v-list-item-title>
+              <v-list-item-title class="font-weight-blod"
+                >DEV트레이닝</v-list-item-title
+              >
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -51,57 +96,24 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-app-bar app dark>
-        <v-container>
-          <v-row class="d-flex pa-0" justify="space-between">
-            <v-col class="hidden-lg-and-up pa-0">
-              <v-app-bar-nav-icon
-                @click.stop="drawer = !drawer"
-              ></v-app-bar-nav-icon>
-              <!-- <v-btn icon><v-icon></v-icon></v-btn> -->
-            </v-col>
-            <v-col
-              class="pa-0"
-              :cols="$vuetify.breakpoint.name === 'xs' ? '8' : ''"
-            >
-              <v-fade-transition>
-                <v-text-field
-                  v-if="offsetTop <= 0"
-                  label="검색어를 입력해주세요."
-                  single-line
-                  solo
-                  :append-icon="searchIcon"
-                  hide-details="true"
-                ></v-text-field>
-                <v-btn v-else icon
-                  ><v-icon>{{ searchIcon }}</v-icon></v-btn
-                >
-              </v-fade-transition>
-            </v-col>
-            <!-- <v-col class="d-inline-flex align-center pa-0" cols="auto"
-              ><v-btn text>로그인</v-btn></v-col
-            > -->
-          </v-row>
-        </v-container>
-      </v-app-bar>
       <Nuxt></Nuxt>
-      <v-card></v-card>
     </v-main>
   </v-app>
 </template>
 <script>
 import { mapState } from 'vuex'
-import { mdiAccount, mdiMagnify } from '@mdi/js'
+import { mdiAccount, mdiMagnify, mdiBookOpenVariant } from '@mdi/js'
 
-import VisitorCounter from '../components/VisitorCounter'
+// import VisitorCounter from '../components/VisitorCounter'
 
 export default {
   components: {
-    VisitorCounter,
+    // VisitorCounter,
   },
   data: () => ({
     svgPath: mdiAccount,
     searchIcon: mdiMagnify,
+    BookOpenVariant: mdiBookOpenVariant,
     drawer: false,
     group: '',
     collapse: true,

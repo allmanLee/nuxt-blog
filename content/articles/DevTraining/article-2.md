@@ -1,9 +1,9 @@
 ---
-title: vue, javascript
+title: javascript
 description: 리스트만들기에서 v-model 알아보기
 date: '2021-07-31'
 order: [1번 목차, 2번목차 , 3번목차]
-tags: [1,2,3,4,5]
+tags: [javascript]
 ---
 
 <!-- 목차 -->

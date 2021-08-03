@@ -7,14 +7,18 @@
             >DEV 트레이닝</v-card-title
           > </v-col
         ><v-col cols="auto" class="d-none d-sm-flex" align-self="center">
-          <v-btn icon
+          <v-btn icon to="/DevTrainingPage" nuxt
             ><v-icon large color="black">{{ svgPath }}</v-icon></v-btn
           ></v-col
         >
       </v-row>
     </v-container>
     <v-slide-group v-model="slideIndex" center-active mandatory>
-      <v-slide-item v-for="n in 5" :key="n" v-slot="{ active, toggle }">
+      <v-slide-item
+        v-for="(item, index) in navTags"
+        :key="index"
+        v-slot="{ active, toggle }"
+      >
         <v-card
           v-touch="{
             left: () => slideSwipe('Left'),
@@ -27,6 +31,9 @@
           class="ma-4"
           @click="toggle"
         >
+          <v-card-title>{{}}</v-card-title>
+          <v-card-text>{{}}</v-card-text>
+          <v-card-actions>{{}}</v-card-actions>
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -40,6 +47,10 @@ export default {
       svgPath: mdiViewGridOutline,
       model: 0,
       slideIndex: 0,
+      navTags: ['javascript', 'html', 'css', 'git', 'nuxt', 'vue'],
+      findPagesData: [],
+      reduceResult: [],
+      tmp: [],
     }
   },
   computed: {
@@ -64,6 +75,33 @@ export default {
       if (direction === 'Left') this.slideIndex++
       else if (direction === 'Right') this.slideIndex--
     },
+
+    async joinFoundData() {
+      this.reduceResult = await this.navTags.reduce(async (acc, tag) => {
+        const tmp = await this.$content('/articles/DevTraining')
+          .only('title')
+          .where({
+            tags: { $contains: tag },
+          })
+          .fetch()
+
+        return { ...acc, [tag]: tmp.length }
+      }, {})
+    },
+
+    // findPagesOfTag(tag) {
+    //   const result = this.$content('/articles/DevTraining')
+    //     .only('title')
+    //     .where({
+    //       tags: { $contains: tag },
+    //     })
+    //     .fetch()
+    //   return result
+    // },
+  },
+  mounted() {
+    this.joinFoundData()
+    console.log(this.reduceResult)
   },
 }
 </script>
