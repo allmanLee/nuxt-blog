@@ -1,4 +1,5 @@
 <template>
+
   <v-container class="my-12">
     <v-row align="center" justify="center">
       <v-col class="text-center" cols="12">
@@ -11,7 +12,13 @@
       <v-col cols="12">
         <v-sheet outlined class="py-4 grey lighten-4">
           <v-chip-group class="d-flex px-4" v-model="amenities" column multiple>
-            <v-chip outlined filter color="blue" v-for="tag in a" :key="tag">
+            <v-chip
+              outlined
+              filter
+              color="blue"
+              v-for="tag in navTags"
+              :key="tag"
+            >
               {{ tag }}
             </v-chip>
           </v-chip-group>
@@ -37,7 +44,10 @@
                     class="pa-6"
                     :elevation="hover ? 12 : 4"
                     rounded="xl"
-                    :to="`/blog/tag/${item.slug}`"
+                    :to="{
+                      name: 'DevTrainingPage-slug',
+                      params: { slug: item.slug },
+                    }"
                     nuxt
                   >
                     <v-card-title class="text-h6 text-xs-h4 font-weight-bold">
@@ -78,16 +88,33 @@ export default {
       .catch(() => {
         error({ statusCode: 404, message: 'Page not found' })
       })
-    console.log(articles)
     return { articles }
   },
   data() {
     return {
-      a: ['Vue', 'JavaScript', 'HTML', 'CSS', 'GIT', 'NUXT'],
+      navTags: ['vue', 'javascript', 'html', 'css', 'git', 'nuxt'],
       page: 1,
       selectedTag: 2,
       amenities: [],
+      selectedTags: [],
+      test: ['vue'],
     }
+  },
+  watch: {
+    amenities: {
+      deep: true,
+      async handler() {
+        this.selectedTags = this.amenities.map((val) => {
+          return this.navTags[val]
+        })
+
+        this.articles = await this.$content('/articles/DevTraining')
+          .where({
+            tags: { $contains: this.selectedTags },
+          })
+          .fetch()
+      },
+    },
   },
 }
 </script>
