@@ -1,5 +1,26 @@
 <template>
   <article class="mr-8 mb-8 mt-8">
+    <v-navigation-drawer v-model="drawerRight" clipped fixed floating right app>
+      <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="mt-6 black--text text-h5 font-weight-bold">
+            Content
+          </v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list>
+        <v-list-item
+          v-for="link of page.toc"
+          :key="link.id"
+          :class="{ toc2: link.depth === 2, toc3: link.depth === 3 }"
+        >
+          <NuxtLink :to="`#${link.id}`" active-class="black--text">{{
+            link.text
+          }}</NuxtLink>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-container class="pt-12">
       <h1 class="text-h4 font-weight-bold">{{ page.title }}</h1>
       <br />
@@ -8,20 +29,7 @@
       </h3>
       <h6 class="py-6">{{ page.date }}</h6>
       <v-divider></v-divider>
-      <v-list>
-        <v-list-item class="blue lighten-4 font-weight-bold rounded-lg">
-          목차
-        </v-list-item>
-        <v-list-item
-          v-for="(item, index) in page.toc"
-          :key="index"
-          class="grey lighten-4"
-        >
-          <v-list-item-content>
-            {{ item.text }}
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+
       <nuxt-content :document="page" class="mt-14" />
     </v-container>
   </article>
@@ -38,24 +46,64 @@ export default {
       .catch(() => {
         error({ statusCode: 404, message: 'Page not found' })
       })
-
     return {
       page,
     }
   },
 
   data() {
-    return {}
+    return {
+      drawerRight: true,
+    }
   },
-
   mounted() {
     this.fetchLists(this.page.order)
+    window.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((a) => {
+        console.log(a)
+      })
+      console.log(observer)
+    })
+  },
+  destroyed() {
+    this.drawerRight = false
   },
 
   methods: {
     ...mapMutations({
       fetchLists: 'ui/fetchList',
     }),
+    // 감시자 삽입
+    addIntersectionObserver() {
+      // this.page.toc.forEach((element) => {
+      window.addEventListener('DOMContentLoaded', () => {
+        const observer = new IntersectionObserver((entries) => {
+          console.log(entries)
+          entries.forEach((entry) => {
+            const id = entry.target.getAttribute('id')
+            if (entry.intersectionRatio > 0) {
+              document
+                .querySelector(`nav li a[href="#${id}"]`)
+                .parentElement.classList.add('active')
+            } else {
+              document
+                .querySelector(`nav li a[href="#${id}"]`)
+                .parentElement.classList.remove('active')
+            }
+          })
+        })
+
+        // Track all sections that have an `id` applied
+        document.querySelectorAll('section[id]').forEach((section) => {
+          observer.observe(section)
+        })
+      })
+    },
   },
 }
 </script>
+<style>
+html {
+  scroll-behavior: smooth !important;
+}
+</style>

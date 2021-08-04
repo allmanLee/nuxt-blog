@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar elevate-on-scroll height="60px" color="white" app>
+    <v-app-bar elevate-on-scroll height="60px" clipped-right color="white" app>
       <v-container>
         <v-row justify="end" align="center">
           <v-col>

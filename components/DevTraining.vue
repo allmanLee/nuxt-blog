@@ -15,7 +15,7 @@
     </v-container>
     <v-slide-group v-model="slideIndex" center-active mandatory>
       <v-slide-item
-        v-for="(item, index) in navTags"
+        v-for="(item, index) in reduceResult"
         :key="index"
         v-slot="{ active, toggle }"
       >
@@ -24,16 +24,50 @@
             left: () => slideSwipe('Left'),
             right: () => slideSwipe('Right'),
           }"
-          :color="active ? 'primary' : 'grey lighten-1'"
+          :color="
+            active ? `${cardColor(item.tagName)}` : cardColor(item.tagName)
+          "
           height="200"
           :width="cardWidth"
           elevation="2"
-          class="ma-4"
+          class="ma-4 darken-2"
           @click="toggle"
         >
-          <v-card-title>{{}}</v-card-title>
-          <v-card-text>{{}}</v-card-text>
-          <v-card-actions>{{}}</v-card-actions>
+          <v-card-title class="pb-3 text-h4 font-weight-bold white--text">{{
+            item.tagName
+          }}</v-card-title>
+          <v-card-text class="text-h4 font-weight-bold white--text"
+            >{{ item.listLength
+            }}<span class="text-h6"> 페이지</span></v-card-text
+          >
+          <v-divider class="mx-4"></v-divider>
+          <v-card-text
+            class="pt-2 text-body-1 font-weight-bold lightn-2 white--text"
+            >{{ item.lastListTitle }}</v-card-text
+          >
+
+          <v-card-subtitle class="py-0 text-body-2 white--text">{{
+            item.lastListDate
+          }}</v-card-subtitle>
+          <v-overlay absolute :value="active"
+            ><v-card-actions
+              ><v-btn
+                :to="{
+                  name: 'DevTrainingPage',
+                  params: { tagName: item.tagName },
+                }"
+                nuxt
+                >모아보기</v-btn
+              ><v-btn
+                :to="{
+                  name: 'DevTrainingPage-slug',
+                  params: { slug: item.lastListSlug },
+                }"
+                nuxt
+                >마지막 글 보기</v-btn
+              ></v-card-actions
+            ></v-overlay
+          >
         </v-card>
       </v-slide-item>
     </v-slide-group>
@@ -69,6 +103,26 @@ export default {
       }
       return 0
     },
+    cardColor() {
+      return (tagName) => {
+        switch (tagName) {
+          case this.navTags[0]:
+            return 'yellow '
+          case this.navTags[1]:
+            return 'blue'
+          case this.navTags[2]:
+            return 'deep-orange'
+          case this.navTags[3]:
+            return 'blue-grey'
+          case this.navTags[4]:
+            return 'light-green'
+          case this.navTags[5]:
+            return 'teal'
+        }
+
+        return 'primary'
+      }
+    },
   },
   methods: {
     slideSwipe(direction) {
@@ -77,35 +131,47 @@ export default {
     },
 
     async joinFoundData() {
-      this.reduceResult = await this.navTags.reduce(async (acc, tag) => {
-        const tmp = await this.$content('/articles/DevTraining')
-          .only('title')
-          .where({
-            tags: { $contains: tag },
-          })
-          .fetch()
+      const reduceResult = await this.navTags.reduce(async (acc, tag) => {
+        const tmp = await this.findPagesOfTag(tag)
+        const accTmp = await acc
 
-        return { ...acc, [tag]: tmp.length }
-      }, {})
+        const tmpFirstItem = tmp[0]
+        return [
+          ...accTmp,
+          {
+            tagName: tag,
+            listLength: tmp.length,
+            lastListTitle: tmpFirstItem ? tmpFirstItem.title : undefined,
+            lastListSlug: tmpFirstItem ? tmpFirstItem.slug : undefined,
+            lastListDate: tmpFirstItem ? tmpFirstItem.date : undefined,
+          },
+        ]
+      }, [])
+      return reduceResult
     },
 
-    // findPagesOfTag(tag) {
-    //   const result = this.$content('/articles/DevTraining')
-    //     .only('title')
-    //     .where({
-    //       tags: { $contains: tag },
-    //     })
-    //     .fetch()
-    //   return result
-    // },
+    findPagesOfTag(tag) {
+      const result = this.$content('/articles/DevTraining')
+        .only(['title', 'date', 'slug'])
+        .where({
+          tags: { $contains: tag },
+        })
+        .fetch()
+
+      return result
+    },
   },
-  mounted() {
-    this.joinFoundData()
-    console.log(this.reduceResult)
+  created() {
+    this.joinFoundData().then((result) => {
+      this.reduceResult = result
+      console.log(this.reduceResult)
+    })
   },
+  mounted() {},
 }
 </script>
 <style>
+/*부드러운 스크롤 효과*/
 .v-slide-group__prev {
   position: absolute;
   height: 200px;
