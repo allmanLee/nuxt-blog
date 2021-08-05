@@ -14,9 +14,13 @@
           :key="link.id"
           :class="{ toc2: link.depth === 2, toc3: link.depth === 3 }"
         >
-          <NuxtLink :to="`#${link.id}`" active-class="black--text">{{
-            link.text
-          }}</NuxtLink>
+          <NuxtLink
+            :to="`#${link.id}`"
+            :id="`toc-${link.id}`"
+            class="toc-text"
+            active-class="toc-active"
+            ><i class="toc-icon"></i>{{ link.text }}</NuxtLink
+          >
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -58,11 +62,31 @@ export default {
   },
   mounted() {
     this.fetchLists(this.page.order)
-    window.addEventListener('DOMContentLoaded', () => {
-      const observer = new IntersectionObserver((a) => {
-        console.log(a)
-      })
-      console.log(observer)
+    // IntersectionObserver의 options를 설정합니다.
+
+    const observer = new IntersectionObserver(
+      (entries, observe) => {
+        entries.forEach((entry) => {
+          // 관찰 대상이 viewport 안에 들어온 경우 image 로드
+          if (entry.isIntersecting) {
+            // data-src 정보를 타켓의 src 속성에 설정
+            // entry.target.innerHTML
+
+            this.$router.push(`#${entry.target.id}`)
+          }
+        })
+      },
+      {
+        root: null,
+        rootMargin: '-30% 0px -60% 0px',
+        threshold: 1,
+      }
+    )
+
+    // 관찰할 대상을 선언하고, 해당 속성을 관찰시킨다.
+    const header2 = document.querySelectorAll('h2')
+    header2.forEach((el) => {
+      observer.observe(el)
     })
   },
   destroyed() {
@@ -74,36 +98,38 @@ export default {
       fetchLists: 'ui/fetchList',
     }),
     // 감시자 삽입
-    addIntersectionObserver() {
-      // this.page.toc.forEach((element) => {
-      window.addEventListener('DOMContentLoaded', () => {
-        const observer = new IntersectionObserver((entries) => {
-          console.log(entries)
-          entries.forEach((entry) => {
-            const id = entry.target.getAttribute('id')
-            if (entry.intersectionRatio > 0) {
-              document
-                .querySelector(`nav li a[href="#${id}"]`)
-                .parentElement.classList.add('active')
-            } else {
-              document
-                .querySelector(`nav li a[href="#${id}"]`)
-                .parentElement.classList.remove('active')
-            }
-          })
-        })
-
-        // Track all sections that have an `id` applied
-        document.querySelectorAll('section[id]').forEach((section) => {
-          observer.observe(section)
-        })
-      })
-    },
+    addIntersectionObserver() {},
   },
 }
 </script>
 <style>
-html {
-  scroll-behavior: smooth !important;
+.toc-text {
+  color: #9e9e9e !important;
+  text-decoration: none;
+}
+.toc-icon {
+  display: inline-block;
+  background: #9e9e9e;
+  margin-right: 10px;
+  width: 2px;
+  height: 10px;
+}
+.toc-text:hover {
+  color: black !important;
+}
+
+.toc-active-icon {
+  display: inline-block;
+  background: #9e9e9e;
+  margin-right: 10px;
+  width: 2px;
+  height: 10px;
+}
+
+.toc-active {
+  color: black !important;
+  font-weight: bold;
+  transition: font-weight 0.3s;
+  text-decoration: none;
 }
 </style>
