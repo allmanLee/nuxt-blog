@@ -72,7 +72,7 @@ export default {
             // data-src 정보를 타켓의 src 속성에 설정
             // entry.target.innerHTML
 
-            this.$router.push(`#${entry.target.id}`)
+            this.$router.replace(`#${entry.target.id}`)
           }
         })
       },

@@ -82,11 +82,13 @@
 <script>
 export default {
   async asyncData({ $content, params, error }) {
+    // const searchTag = params.tagName
     const articles = await $content('/articles/DevTraining')
       .fetch()
       .catch(() => {
         error({ statusCode: 404, message: 'Page not found' })
       })
+
     return { articles }
   },
   data() {
@@ -96,7 +98,6 @@ export default {
       selectedTag: 2,
       amenities: [],
       selectedTags: [],
-      test: ['vue'],
     }
   },
   watch: {
@@ -114,6 +115,10 @@ export default {
           .fetch()
       },
     },
+  },
+  mounted() {
+    console.log(`받아온 태그 : ${this.$route.params.tagName}`)
+    this.amenities.push(this.navTags.indexOf(this.$route.params.tagName))
   },
 }
 </script>
