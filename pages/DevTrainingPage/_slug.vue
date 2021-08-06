@@ -1,6 +1,13 @@
 <template>
   <article class="mr-8 mb-8 mt-8">
-    <v-navigation-drawer v-model="drawerRight" clipped fixed floating right app>
+    <v-navigation-drawer
+      :v-model="this.$vuetify.breakpoint.name === 'lg' ? true : false"
+      clipped
+      fixed
+      floating
+      right
+      app
+    >
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="mt-6 black--text text-h5 font-weight-bold">
@@ -19,6 +26,7 @@
             :id="`toc-${link.id}`"
             class="toc-text"
             active-class="toc-active"
+            replace
             ><i class="toc-icon"></i>{{ link.text }}</NuxtLink
           >
         </v-list-item>
@@ -36,29 +44,45 @@
 
       <nuxt-content :document="page" class="mt-14" />
     </v-container>
+    <v-divider></v-divider>
+    <dev-training-preview
+      :resultListByTag="morePagesByTag"
+    ></dev-training-preview>
   </article>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import DevTrainingPreview from '../../components/DevTrainingPreview.vue'
 export default {
   async asyncData({ $content, params, error }) {
-    // const slug = `DevTraining/${params.slug}`
-    console.log(`DevTraining/${params.slug}`)
     const page = await $content(`articles/DevTraining/${params.slug}`)
       .fetch()
       .catch(() => {
         error({ statusCode: 404, message: 'Page not found' })
       })
+    const morePagesByTag = await $content('articles/DevTraining')
+      .only(['title', 'description', 'date', 'tags', 'slug'])
+      .where({
+        tags: { $containsAny: page.tags },
+      })
+      .fetch()
     return {
       page,
+      morePagesByTag,
     }
   },
-
+  components: {
+    DevTrainingPreview,
+  },
   data() {
-    return {
-      drawerRight: true,
-    }
+    return {}
+  },
+  computed: {
+    // drawerRight() {
+    //   // const active =
+    //   // return active
+    // },
   },
   mounted() {
     this.fetchLists(this.page.order)
@@ -71,15 +95,15 @@ export default {
           if (entry.isIntersecting) {
             // data-src 정보를 타켓의 src 속성에 설정
             // entry.target.innerHTML
-
-            this.$router.replace(`#${entry.target.id}`)
+            location.hash = entry.target.id
+            // this.$router.replace(`#${entry.target.id}`)
           }
         })
       },
       {
         root: null,
-        rootMargin: '-30% 0px -60% 0px',
-        threshold: 1,
+        rootMargin: '-10px 0px -80% 0px',
+        threshold: 0,
       }
     )
 
