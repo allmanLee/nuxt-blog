@@ -5,7 +5,7 @@
         <v-row justify="end" align="center">
           <v-col>
             <v-app-bar-nav-icon
-              v-if="$vuetify.breakpoint.name !== 'lg'"
+              v-if="$vuetify.breakpoint.name !== 'lg' || 'xg'"
               @click="drawer = true"
             ></v-app-bar-nav-icon
           ></v-col>
@@ -18,20 +18,20 @@
               hide-details="true"
             ></v-text-field>
           </v-col>
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
             <v-btn large text
               ><v-icon class="mr-2">{{ BookOpenVariant }}</v-icon> DEV
               트레이닝</v-btn
             >
           </v-col>
 
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
             <v-btn large text class="font-weight-light">My ISSUE</v-btn>
           </v-col>
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
             <v-btn large text class="font-weight-light"> PORTFOLIO</v-btn>
           </v-col>
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg'">
+          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
             <v-btn large text class="font-weight-light"> ABOUT</v-btn>
           </v-col>
         </v-row>

@@ -1,36 +1,41 @@
 <template>
-  <v-card class="ma-20">
-    <v-carousel
-      v-model="indexOfSelectedBanner"
-      height="560"
-      class="pa-0"
-      hide-delimiters
-    >
-      <v-carousel-item v-for="({ portfolioBgColor }, i) in portfolio" :key="i">
-        <v-sheet :color="portfolioBgColor" height="110%" tile>
-          <v-row class="fill-height" align="center" justify="center">
-            <img height="600" src="~assets/img/bennerHanta.png" />
-            <!-- <div class="text-h2">Slide {{ i + 1 }}</div> -->
-          </v-row>
-        </v-sheet>
-      </v-carousel-item>
-      <v-footer absolute class="pa-0 banner-bg justify-center" light>
-        <v-btn-toggle
-          v-model="indexOfSelectedBanner"
-          active-class="banner-btn-active"
+  <v-carousel
+    v-model="indexOfSelectedBanner"
+    height="auto"
+    class="pa-0"
+    hide-delimiters
+  >
+    <v-carousel-item v-for="({ portfolioBgColor }, i) in portfolio" :key="i">
+      <v-row align="center" justify="center">
+        <v-col>
+          <v-card :color="portfolioBgColor" tile>
+            <v-img :src="require('../assets/img/bennerHanta.png')"></v-img>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-carousel-item>
+    <v-footer absolute class="pa-0 banner-bg" light>
+      <v-slide-group show-arrows v-model="indexOfSelectedBanner">
+        <v-slide-item
+          v-for="({ titleOfPortfolio }, index) in portfolio"
+          :key="index"
           class="ma-0 pa-0 justify-center banner-btn"
-          ><v-btn
+          v-slot="{ active }"
+        >
+          <v-btn
             width="220px"
             class="banner-btn"
             height="60px"
-            v-for="({ titleOfPortfolio }, index) in portfolio"
-            :key="index"
-            >{{ titleOfPortfolio }}</v-btn
-          ></v-btn-toggle
-        >
-      </v-footer>
-    </v-carousel>
-  </v-card>
+            :input-value="active"
+            active-class="banner-btn-active"
+            @click="toggle"
+          >
+            {{ titleOfPortfolio }}
+          </v-btn>
+        </v-slide-item>
+      </v-slide-group>
+    </v-footer>
+  </v-carousel>
 </template>
 <script>
 export default {
