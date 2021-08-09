@@ -1,47 +1,62 @@
 <template>
   <v-container class="my-12">
-    <v-row align="center" justify="center">
-      <v-col class="text-center" cols="12">
-        <h1 class="text-h3 text-xs-h2 font-weight-bold mb-4">DEV 트레이닝</h1>
-        <h4 class="mt-8">- 1주에 3회 기록 -</h4>
-        <h5 class="font-weight-thin">DEV 트레이닝 개발하면서 정리하기</h5>
-      </v-col>
-    </v-row>
-    <v-row justify="space-around">
-      <v-col cols="12">
-        <v-sheet outlined class="py-4 grey lighten-4">
-          <v-chip-group class="d-flex px-4" v-model="amenities" column multiple>
-            <v-chip
-              outlined
-              filter
-              color="blue"
-              v-for="tag in navTags"
-              :key="tag"
-            >
-              {{ tag }}
-            </v-chip>
-          </v-chip-group>
-        </v-sheet>
+    <v-row>
+      <v-col
+        ><v-card flat outlined>
+          <v-container>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  v-model="q"
+                  @input="$fetch"
+                  label="검색어를 입력해주세요."
+                  color="purple"
+                  single-line
+                  outlined
+                  :append-icon="searchIcon"
+                  hide-details="true"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-card-subtitle>기술 태그</v-card-subtitle>
+                <v-chip-group
+                  class="px-2 font-weight-bold"
+                  v-model="amenities"
+                  column
+                  multiple
+                >
+                  <v-chip
+                    active-class="purple white--text"
+                    label
+                    v-for="tag in navTags"
+                    :key="tag"
+                  >
+                    {{ tag }}
+                  </v-chip>
+                </v-chip-group>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
       </v-col>
     </v-row>
 
-    <v-divider></v-divider>
     <v-container>
+      <v-row class="text-h6 font-weight-bold mt-6"
+        ><v-col>전체 <v-divider></v-divider></v-col
+      ></v-row>
       <v-row
         ><v-col>
           <v-container>
             <v-row class="pt-0">
               <!-- 이부분 for문 사용 -->
-              <v-col
-                v-for="(item, index) in articles"
-                :key="index"
-                cols="12"
-                sm="6"
-              >
+              <v-col v-for="(item, index) in articles" :key="index">
                 <v-hover v-slot="{ hover }">
                   <v-card
-                    class="pa-6"
-                    :elevation="hover ? 12 : 4"
+                    class="pa-2"
+                    :elevation="hover ? 6 : 0"
                     rounded="xl"
                     :to="{
                       name: 'DevTrainingPage-slug',
@@ -49,26 +64,32 @@
                     }"
                     nuxt
                   >
-                    <v-card-title class="text-h6 text-xs-h4 font-weight-bold">
+                    <v-card-title
+                      class="text-h6 text-xs-h4 text-truncate font-weight-bold"
+                    >
                       {{ item.title }}
                     </v-card-title>
-                    <v-card-text class="text-sub-1 text-xs-body-1">
+                    <v-card-text
+                      class="text-sub-1 text-truncate text-xs-body-1"
+                    >
                       {{ item.description }}</v-card-text
                     >
                     <v-card-subtitle class="grey--text lighten-4">
                       {{ item.date }}
                     </v-card-subtitle>
                     <v-card-actions>
-                      <v-chip-group
-                        column
-                        multiple
-                        active-class="primary--text"
-                      >
-                        <v-chip v-for="tag in item.tags" :key="tag">
+                      <v-chip-group column multiple>
+                        <v-chip
+                          v-for="tag in item.tags"
+                          :key="tag"
+                          label
+                          :class="`${cardColor(tag)} white--text lighten-2`"
+                        >
                           {{ tag }}
                         </v-chip>
                       </v-chip-group>
                     </v-card-actions>
+                    <v-overlay absolute v-if="hover"></v-overlay>
                   </v-card>
                 </v-hover>
               </v-col>
@@ -80,7 +101,13 @@
   </v-container>
 </template>
 <script>
+import { mdiMagnify } from '@mdi/js'
 export default {
+  async fetch() {
+    this.articles = await this.$content('/articles/DevTraining')
+      .search(this.q)
+      .fetch()
+  },
   async asyncData({ $content, params, error }) {
     const articles = await $content('/articles/DevTraining')
       .fetch()
@@ -92,12 +119,36 @@ export default {
   },
   data() {
     return {
+      searchIcon: mdiMagnify,
       navTags: ['vue', 'javascript', 'html', 'css', 'git', 'nuxt'],
       page: 1,
       selectedTag: 2,
       amenities: [],
       selectedTags: [],
+      q: '',
     }
+  },
+  computed: {
+    cardColor() {
+      return (tagName) => {
+        switch (tagName) {
+          case this.navTags[0]:
+            return 'yellow '
+          case this.navTags[1]:
+            return 'blue'
+          case this.navTags[2]:
+            return 'deep-orange'
+          case this.navTags[3]:
+            return 'blue-grey'
+          case this.navTags[4]:
+            return 'light-green'
+          case this.navTags[5]:
+            return 'teal'
+        }
+
+        return 'primary'
+      }
+    },
   },
   watch: {
     amenities: {

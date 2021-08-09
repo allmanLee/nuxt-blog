@@ -36,13 +36,13 @@
           <v-card-title class="pb-3 text-h4 font-weight-bold white--text">{{
             item.tagName
           }}</v-card-title>
-          <v-card-text class="text-h4 font-weight-bold white--text"
-            >{{ item.listLength
-            }}<span class="text-h6"> 페이지</span></v-card-text
-          >
+          <v-card-text class="text-h4 font-weight-bold white--text">
+            {{ item.listLength }}
+            <span class="text-h6"> 페이지</span>
+          </v-card-text>
           <v-divider class="mx-4"></v-divider>
           <v-card-text
-            class="pt-2 text-body-1 font-weight-bold lightn-2 white--text"
+            class="pt-2 pb-0 text-body-1 font-weight-bold lightn-2 white--text"
             >{{ item.lastListTitle }}</v-card-text
           >
 
@@ -52,6 +52,7 @@
           <v-overlay absolute :value="active"
             ><v-card-actions
               ><v-btn
+                light
                 :to="{
                   name: 'DevTrainingPage',
                   params: { tagName: item.tagName },
@@ -59,6 +60,8 @@
                 nuxt
                 >모아보기</v-btn
               ><v-btn
+                color="primary"
+                v-if="item.lastListSlug"
                 :to="{
                   name: 'DevTrainingPage-slug',
                   params: { slug: item.lastListSlug },

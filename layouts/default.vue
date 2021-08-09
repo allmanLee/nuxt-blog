@@ -5,33 +5,34 @@
         <v-row justify="end" align="center">
           <v-col>
             <v-app-bar-nav-icon
-              v-if="$vuetify.breakpoint.name !== 'lg' || 'xg'"
+              v-if="
+                $vuetify.breakpoint.xs ||
+                $vuetify.breakpoint.sm ||
+                $vuetify.breakpoint.md
+              "
               @click="drawer = true"
             ></v-app-bar-nav-icon
           ></v-col>
-          <v-col cols="5" class="align-start">
-            <v-text-field
-              class="ma-4"
-              label="검색어를 입력해주세요."
-              single-line
-              :append-icon="searchIcon"
-              hide-details="true"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
+
+          <v-col
+            cols="auto"
+            v-if="$vuetify.breakpoint.xl || $vuetify.breakpoint.lg"
+          >
             <v-btn large text
               ><v-icon class="mr-2">{{ BookOpenVariant }}</v-icon> DEV
               트레이닝</v-btn
             >
           </v-col>
-
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
-            <v-btn large text class="font-weight-light">My ISSUE</v-btn>
-          </v-col>
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
+          <v-col
+            cols="auto"
+            v-if="$vuetify.breakpoint.xl || $vuetify.breakpoint.lg"
+          >
             <v-btn large text class="font-weight-light"> PORTFOLIO</v-btn>
           </v-col>
-          <v-col cols="auto" v-if="$vuetify.breakpoint.name === 'lg' || 'xl'">
+          <v-col
+            cols="auto"
+            v-if="$vuetify.breakpoint.xl || $vuetify.breakpoint.lg"
+          >
             <v-btn large text class="font-weight-light"> ABOUT</v-btn>
           </v-col>
         </v-row>
@@ -70,21 +71,14 @@
           <v-list-item href="DevTrainingPage" nuxt>
             <v-list-item-content>
               <v-list-item-title class="font-weight-blod"
-                >DEV트레이닝</v-list-item-title
+                >About</v-list-item-title
               >
             </v-list-item-content>
           </v-list-item>
           <v-list-item href="DevTrainingPage" nuxt>
             <v-list-item-content>
               <v-list-item-title class="font-weight-blod"
-                >DEV트레이닝</v-list-item-title
-              >
-            </v-list-item-content>
-          </v-list-item>
-          <v-list-item href="DevTrainingPage" nuxt>
-            <v-list-item-content>
-              <v-list-item-title class="font-weight-blod"
-                >DEV트레이닝</v-list-item-title
+                >Portfolio</v-list-item-title
               >
             </v-list-item-content>
           </v-list-item>
