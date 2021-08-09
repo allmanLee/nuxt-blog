@@ -15,7 +15,15 @@
         <v-icon>{{ IconNameIndex }}</v-icon>
       </v-btn>
     </v-fade-transition>
-    <v-navigation-drawer v-model="drawerRight" clipped fixed floating right app>
+    <v-navigation-drawer
+      v-model="drawerRight"
+      class="rounded-xl"
+      clipped
+      fixed
+      floating
+      right
+      app
+    >
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="mt-6 black--text text-h5 font-weight-bold">

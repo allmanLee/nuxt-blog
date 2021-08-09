@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="pa-3">
     <v-carousel
       v-model="indexOfSelectedBanner"
       height="auto"
-      class="pa-0"
+      class="rounded-xl"
       hide-delimiters
     >
       <v-carousel-item v-for="({ portfolioBgColor }, i) in portfolio" :key="i"

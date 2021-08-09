@@ -21,7 +21,7 @@ http.createServer((req, res) => {
 }).listen(3000)
 ```
 
-[Vue warn]: Property or method "keyword" is not defined on the instance but referenced during render. Make sure that this property is reactive, either in the data option, or for class-based components, by initializing the property. See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.
+[Vue warn]: Property or method "keyword" is not defined on the instance but referenced during render. Make sure that this property is reactive, either in the data option, or for class-based components, by initializing the property.
 
 프로퍼티나 메소드가 정의되지는 않았는데, 렌더할때 사용되더라 그러니까 컴포넌트 초기실행할때 정의하고 사용해라 이런 뜻입니다.
 #발생 이유
