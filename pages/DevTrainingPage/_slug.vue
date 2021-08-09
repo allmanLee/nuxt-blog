@@ -1,13 +1,21 @@
-<template>
-  <article class="mr-8 mb-8 mt-8">
-    <v-navigation-drawer
-      :v-model="this.$vuetify.breakpoint.name === 'lg' ? true : false"
-      clipped
-      fixed
-      floating
-      right
-      app
-    >
+<template >
+  <v-container>
+    <v-fade-transition>
+      <v-btn
+        v-show="$vuetify.breakpoint.xs && offsetTop > 10"
+        color="purple"
+        dark
+        fixed
+        bottom
+        right
+        fab
+        v-scroll="onScroll"
+        @click="controlDrawer"
+      >
+        <v-icon>{{ IconNameIndex }}</v-icon>
+      </v-btn>
+    </v-fade-transition>
+    <v-navigation-drawer v-model="drawerRight" clipped fixed floating right app>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="mt-6 black--text text-h5 font-weight-bold">
@@ -48,11 +56,12 @@
     <dev-training-preview
       :resultListByTag="morePagesByTag"
     ></dev-training-preview>
-  </article>
+  </v-container>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
+import { mdiTableOfContents } from '@mdi/js'
 import DevTrainingPreview from '../../components/DevTrainingPreview.vue'
 export default {
   async asyncData({ $content, params, error }) {
@@ -77,7 +86,11 @@ export default {
     DevTrainingPreview,
   },
   data() {
-    return {}
+    return {
+      IconNameIndex: mdiTableOfContents,
+      drawerRight: true,
+      offsetTop: 0,
+    }
   },
   computed: {
     // drawerRight() {
@@ -88,7 +101,6 @@ export default {
   mounted() {
     this.fetchLists(this.page.order)
     // IntersectionObserver의 options를 설정합니다.
-
     const observer = new IntersectionObserver(
       (entries, observe) => {
         entries.forEach((entry) => {
@@ -107,7 +119,6 @@ export default {
         threshold: 0,
       }
     )
-
     // 관찰할 대상을 선언하고, 해당 속성을 관찰시킨다.
     const header2 = document.querySelectorAll('h2')
     header2.forEach((el) => {
@@ -122,8 +133,12 @@ export default {
     ...mapMutations({
       fetchLists: 'ui/fetchList',
     }),
-    // 감시자 삽입
-    addIntersectionObserver() {},
+    controlDrawer() {
+      this.drawerRight = true
+    },
+    onScroll(e) {
+      this.offsetTop = window.scrollY
+    },
   },
 }
 </script>

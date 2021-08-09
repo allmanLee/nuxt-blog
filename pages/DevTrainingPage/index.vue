@@ -1,7 +1,9 @@
 <template>
-  <v-container class="my-12">
+  <v-container>
     <v-row>
       <v-col
+        ><v-card-title class="font-weight-bold purple--text"
+          >DEV 트레이닝</v-card-title
         ><v-card flat outlined>
           <v-container>
             <v-row>
