@@ -56,7 +56,8 @@ import { mapMutations } from 'vuex'
 import DevTrainingPreview from '../../components/DevTrainingPreview.vue'
 export default {
   async asyncData({ $content, params, error }) {
-    const page = await $content(`articles/DevTraining/${params.slug}`)
+    const slug = params.slug || undefined
+    const page = await $content(`articles/DevTraining/${slug}`)
       .fetch()
       .catch(() => {
         error({ statusCode: 404, message: 'Page not found' })
