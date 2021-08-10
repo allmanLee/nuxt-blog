@@ -106,12 +106,12 @@
 import { mdiMagnify } from '@mdi/js'
 export default {
   async fetch() {
-    this.articles = await this.$content('/articles/DevTraining')
+    this.articles = await this.$content('articles/DevTraining')
       .search(this.q)
       .fetch()
   },
   async asyncData({ $content, params, error }) {
-    const articles = await $content('/articles/DevTraining')
+    const articles = await $content('articles/DevTraining')
       .fetch()
       .catch(() => {
         error({ statusCode: 404, message: 'Page not found' })
@@ -160,7 +160,7 @@ export default {
           return this.navTags[val]
         })
 
-        this.articles = await this.$content('/articles/DevTraining')
+        this.articles = await this.$content('articles/DevTraining')
           .where({
             tags: { $contains: this.selectedTags },
           })

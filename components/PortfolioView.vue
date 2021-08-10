@@ -44,7 +44,7 @@
                 { titleOfPortfolio, descriptionOfPortfolio }, index
               ) in portfolio"
               :key="index"
-              class="px-8 d-flex flex-column text-truncate"
+              class="px-8 d-flex flex-column white--text text-truncate"
               active-class="banner-btn-active"
             >
               <dd class="text-sub-2 font-weigh-medium mb-2">

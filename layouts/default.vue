@@ -132,7 +132,7 @@
         </v-navigation-drawer>
       </v-card>
     </keep-alive>
-    <v-main class="pa-0">
+    <v-main>
       <Nuxt></Nuxt>
     </v-main>
   </v-app>

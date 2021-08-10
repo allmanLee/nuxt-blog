@@ -154,7 +154,7 @@ export default {
     },
 
     findPagesOfTag(tag) {
-      const result = this.$content('/articles/DevTraining')
+      const result = this.$content('articles/DevTraining')
         .only(['title', 'date', 'slug'])
         .where({
           tags: { $contains: tag },
