@@ -1,18 +1,17 @@
  <template>
   <v-container>
-    <v-container>
-      <v-row dense justify="space-between">
-        <v-col cols="auto">
-          <v-card-title class="d-flex text-sm-h5 text-h6 font-weight-bold pa-0"
-            >DEV 트레이닝</v-card-title
-          > </v-col
-        ><v-col cols="auto" class="d-none d-sm-flex" align-self="center">
-          <v-btn icon to="/DevTrainingPage" nuxt
-            ><v-icon large color="black">{{ svgPath }}</v-icon></v-btn
-          ></v-col
-        >
-      </v-row>
-    </v-container>
+    <v-row dense justify="space-between">
+      <v-col cols="auto">
+        <v-card-title class="d-flex text-sm-h5 text-h6 font-weight-bold pa-0"
+          >DEV 트레이닝</v-card-title
+        > </v-col
+      ><v-col cols="auto" class="d-none d-sm-flex" align-self="center">
+        <v-btn icon to="/DevTrainingPage" nuxt
+          ><v-icon large color="black">{{ svgPath }}</v-icon></v-btn
+        ></v-col
+      >
+    </v-row>
+
     <v-slide-group v-model="slideIndex" center-active mandatory>
       <v-slide-item
         v-for="(item, index) in reduceResult"

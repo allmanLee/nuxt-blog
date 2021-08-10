@@ -1,10 +1,12 @@
 <template>
   <v-container>
     <v-row>
-      <v-col
-        ><v-card-title class="font-weight-bold purple--text"
-          >DEV 트레이닝</v-card-title
-        ><v-card flat outlined>
+      <v-col>
+        <div class="text-h4 my-4">DEV 트레이닝</div>
+        <div class="text-h5">
+          <span class="font-weight-bold mr-2">주 3회</span>업로드 하고있습니다!
+        </div>
+        <v-card class="mt-4" flat outlined>
           <v-container>
             <v-row>
               <v-col>
@@ -15,6 +17,7 @@
                   color="purple"
                   single-line
                   outlined
+                  background-color="#F3E5F5"
                   :append-icon="searchIcon"
                   hide-details="true"
                 ></v-text-field>
@@ -22,9 +25,9 @@
             </v-row>
             <v-row>
               <v-col>
-                <v-card-subtitle>기술 태그</v-card-subtitle>
+                <v-card-subtitle class="pa-0">기술 태그</v-card-subtitle>
                 <v-chip-group
-                  class="px-2 font-weight-bold"
+                  class="px-0 font-weight-bold"
                   v-model="amenities"
                   column
                   multiple
@@ -51,52 +54,47 @@
       ></v-row>
       <v-row
         ><v-col>
-          <v-container>
-            <v-row class="pt-0">
-              <!-- 이부분 for문 사용 -->
-              <v-col v-for="(item, index) in articles" :key="index">
-                <v-hover v-slot="{ hover }">
-                  <v-card
-                    class="pa-2"
-                    :elevation="hover ? 6 : 0"
-                    rounded="xl"
-                    :to="{
-                      name: 'DevTrainingPage-slug',
-                      params: { slug: item.slug },
-                    }"
-                    nuxt
+          <v-row class="pt-0">
+            <!-- 이부분 for문 사용 -->
+            <v-col v-for="(item, index) in articles" :key="index">
+              <v-hover v-slot="{ hover }">
+                <v-card
+                  :elevation="hover ? 6 : 1"
+                  rounded="lg"
+                  :to="{
+                    name: 'DevTrainingPage-slug',
+                    params: { slug: item.slug },
+                  }"
+                  nuxt
+                >
+                  <v-card-title
+                    class="text-h6 text-xs-h4 text-truncate font-weight-bold"
                   >
-                    <v-card-title
-                      class="text-h6 text-xs-h4 text-truncate font-weight-bold"
-                    >
-                      {{ item.title }}
-                    </v-card-title>
-                    <v-card-text
-                      class="text-sub-1 text-truncate text-xs-body-1"
-                    >
-                      {{ item.description }}</v-card-text
-                    >
-                    <v-card-subtitle class="grey--text lighten-4">
-                      {{ item.date }}
-                    </v-card-subtitle>
-                    <v-card-actions>
-                      <v-chip-group column multiple>
-                        <v-chip
-                          v-for="tag in item.tags"
-                          :key="tag"
-                          label
-                          :class="`${cardColor(tag)} white--text lighten-2`"
-                        >
-                          {{ tag }}
-                        </v-chip>
-                      </v-chip-group>
-                    </v-card-actions>
-                    <v-overlay absolute v-if="hover"></v-overlay>
-                  </v-card>
-                </v-hover>
-              </v-col>
-            </v-row>
-          </v-container>
+                    {{ item.title }}
+                  </v-card-title>
+                  <v-card-text class="text-sub-1 text-truncate text-xs-body-1">
+                    {{ item.description }}</v-card-text
+                  >
+                  <v-card-subtitle class="grey--text lighten-4">
+                    {{ item.date }}
+                  </v-card-subtitle>
+                  <v-card-text>
+                    <v-chip-group column multiple>
+                      <v-chip
+                        v-for="tag in item.tags"
+                        :key="tag"
+                        label
+                        :class="`${cardColor(tag)} white--text lighten-2`"
+                      >
+                        {{ tag }}
+                      </v-chip>
+                    </v-chip-group>
+                  </v-card-text>
+                  <v-overlay absolute v-if="hover"></v-overlay>
+                </v-card>
+              </v-hover>
+            </v-col>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>

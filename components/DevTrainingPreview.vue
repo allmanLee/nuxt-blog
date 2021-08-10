@@ -3,9 +3,9 @@
     <v-container>
       <v-row dense justify="space-between">
         <v-col cols="auto">
-          <v-card-title class="d-flex text-sm-h5 text-h6 font-weight-bold pa-0"
-            >전체보기</v-card-title
-          >
+          <v-card-title class="d-flex text-sm-h6 font-weight-bold pa-0"
+            >전체보기
+          </v-card-title>
         </v-col>
       </v-row>
     </v-container>

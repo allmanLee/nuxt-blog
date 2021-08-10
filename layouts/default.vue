@@ -31,7 +31,15 @@
             cols="auto"
             v-if="$vuetify.breakpoint.xl || $vuetify.breakpoint.lg"
           >
-            <v-btn large text class="font-weight-light"> PORTFOLIO</v-btn>
+            <v-btn
+              large
+              text
+              href="PortfolioPage"
+              nuxt
+              class="font-weight-light"
+            >
+              PORTFOLIO</v-btn
+            >
           </v-col>
           <v-col
             cols="auto"
@@ -42,99 +50,112 @@
         </v-row>
       </v-container>
     </v-app-bar>
-    <keep-alive>
-      <v-card class="pa-4">
-        <v-navigation-drawer
-          temporary
-          fixed
-          v-model="drawer"
-          class="rounded-xl"
-          app
-        >
-          <v-list-item height="200px">
-            <v-list-item-content class="my-xs-4,my-12">
-              <v-list-item-title
-                class="
-                  ma-3
-                  pa-2
-                  text-h3 text-center
-                  purple--text
-                  font-weight-bold
-                "
-              >
-                Allman
-              </v-list-item-title>
-              <v-list-item-subtitle
-                class="text-h8 font-weight-bold text-center"
-              >
-                FRONT-END DEVELOPER
-              </v-list-item-subtitle>
-              <v-list-item-subtitle class="mb-4 text-center">
-                SINCE 2021.07.22
-              </v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
 
-          <v-divider class="mt-4"></v-divider>
-          <v-list>
-            <v-list-item-group
-              color="purple"
-              mandatory
-              v-model="group"
-              active-class="text--accent-4"
+    <v-card class="pa-4">
+      <v-navigation-drawer
+        temporary
+        fixed
+        v-model="drawer"
+        class="rounded-tr-lg rounded-br-lg"
+        app
+      >
+        <v-list-item height="200px">
+          <v-list-item-content class="my-xs-4,my-12">
+            <v-list-item-title
+              class="
+                ma-3
+                pa-2
+                text-h3 text-center
+                purple--text
+                font-weight-bold
+              "
             >
-              <v-list-item href="/" nuxt value="home">
-                <v-list-item-icon color="purple"
-                  ><v-icon>{{ mdiHomeIcon }}</v-icon></v-list-item-icon
+              Allman
+            </v-list-item-title>
+            <v-list-item-subtitle class="text-h8 font-weight-bold text-center">
+              FRONT-END DEVELOPER
+            </v-list-item-subtitle>
+            <v-list-item-subtitle class="mb-4 text-center">
+              SINCE 2021.07.22
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider class="mt-4"></v-divider>
+        <v-list>
+          <v-list-item-group
+            color="purple"
+            mandatory
+            v-model="group"
+            active-class="text--accent-4"
+          >
+            <v-list-item href="/" nuxt value="home">
+              <v-list-item-icon color="purple"
+                ><v-icon>{{ mdiHomeIcon }}</v-icon></v-list-item-icon
+              >
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-blod"
+                  >HOME</v-list-item-title
                 >
-                <v-list-item-content>
-                  <v-list-item-title class="font-weight-blod"
-                    >HOME</v-list-item-title
-                  >
-                </v-list-item-content>
-              </v-list-item>
-              <v-subheader>메뉴</v-subheader>
-              <v-list-item href="DevTrainingPage" value="dev" nuxt>
-                <v-list-item-icon color="purple"
-                  ><v-icon>{{ BookOpenVariant }}</v-icon></v-list-item-icon
+              </v-list-item-content>
+            </v-list-item>
+            <v-subheader>메뉴</v-subheader>
+            <v-list-item href="DevTrainingPage" value="dev" nuxt>
+              <v-list-item-icon color="purple"
+                ><v-icon>{{ BookOpenVariant }}</v-icon></v-list-item-icon
+              >
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-blod"
+                  >DEV트레이닝</v-list-item-title
                 >
-                <v-list-item-content>
-                  <v-list-item-title class="font-weight-blod"
-                    >DEV트레이닝</v-list-item-title
-                  >
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item href="DevTrainingPage" value="about" nuxt>
-                <v-list-item-icon
-                  ><v-icon>{{ mdiFaceProfileIcon }}</v-icon></v-list-item-icon
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item href="About" value="about" nuxt>
+              <v-list-item-icon
+                ><v-icon>{{ mdiFaceProfileIcon }}</v-icon></v-list-item-icon
+              >
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-blod"
+                  >어바웃</v-list-item-title
                 >
-                <v-list-item-content>
-                  <v-list-item-title class="font-weight-blod"
-                    >어바웃</v-list-item-title
-                  >
-                </v-list-item-content>
-              </v-list-item>
-              <v-list-item href="DevTrainingPage" value="portfolio" nuxt>
-                <v-list-item-icon
-                  ><v-icon>{{ mdiFolderStarIcon }}</v-icon></v-list-item-icon
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item href="PortfolioPage" value="portfolio" nuxt>
+              <v-list-item-icon
+                ><v-icon>{{ mdiFolderStarIcon }}</v-icon></v-list-item-icon
+              >
+              <v-list-item-content>
+                <v-list-item-title class="font-weight-blod"
+                  >포트폴리오</v-list-item-title
                 >
-                <v-list-item-content>
-                  <v-list-item-title class="font-weight-blod"
-                    >포트폴리오</v-list-item-title
-                  >
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-          <v-footer outlined absolute class="justify-center">
-            <visitor-counter></visitor-counter>
-          </v-footer>
-        </v-navigation-drawer>
-      </v-card>
-    </keep-alive>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+        <v-footer outlined absolute class="justify-center">
+          <visitor-counter></visitor-counter>
+        </v-footer>
+      </v-navigation-drawer>
+    </v-card>
     <v-main>
       <Nuxt></Nuxt>
     </v-main>
+    <v-footer
+      ><v-container>
+        <v-row>
+          <v-col class="grey--text">
+            <span class="text-h6 font-weight-bold mr-1">Allman</span> Fron-end
+            Developer
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col class="grey--text py-0">muenzz119@naver.com</v-col>
+        </v-row>
+        <v-row>
+          <v-col class="text-body-2 grey--text pt-0">©leeyoujun 2021</v-col>
+        </v-row>
+      </v-container>
+    </v-footer>
   </v-app>
 </template>
 <script>

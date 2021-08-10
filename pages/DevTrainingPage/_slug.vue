@@ -17,7 +17,7 @@
     </v-fade-transition>
     <v-navigation-drawer
       v-model="drawerRight"
-      class="rounded-xl"
+      class="rounded-tl-lg rounded-bl-lg"
       clipped
       fixed
       floating
