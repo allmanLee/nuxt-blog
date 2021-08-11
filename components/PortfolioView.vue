@@ -11,7 +11,10 @@
           <v-container class="pa-0">
             <v-row align="center" justify="center">
               <v-col>
-                <v-img :src="require('../assets/img/bennerHanta.png')"></v-img>
+                <v-img
+                  lazy-src=""
+                  :src="require('../assets/img/bennerHanta.png')"
+                ></v-img>
               </v-col>
             </v-row>
           </v-container>
@@ -31,13 +34,13 @@
       >
         <v-container class="pa-0">
           <v-tabs
-            light
-            background-color="rgba(0,0,0,0)"
             v-model="indexOfSelectedBanner"
+            background-color="rgba(0,0,0,0)"
             slider-color="purple"
             height="80"
             fixed-tabs
             centered
+            light
           >
             <v-tab
               v-for="(
@@ -59,13 +62,13 @@
       </v-footer>
       <v-footer v-else absolute color="rgba(255,255,255,0.0)" class="pa-0">
         <v-tabs
-          light
-          background-color="rgba(0,0,0,0)"
           v-model="indexOfSelectedBanner"
+          background-color="rgba(0,0,0,0)"
           slider-color="purple"
           height="20"
           fixed-tabs
           centered
+          light
         >
           <v-tab
             v-for="(item, index) in portfolio"

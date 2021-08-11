@@ -1,10 +1,8 @@
 <template>
   <div>
     <v-sheet>
-      <v-container>
-        <v-card-title
-          v-if="$vuetify.breakpoint.xs"
-          class="d-flex text-sm-h5 text-h6 font-weight-bold pa-0"
+      <v-container v-if="$vuetify.breakpoint.xs">
+        <v-card-title class="d-flex text-sm-h5 text-h6 font-weight-bold pa-0"
           >포트폴리오</v-card-title
         >
       </v-container>

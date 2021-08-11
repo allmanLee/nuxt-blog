@@ -4,12 +4,13 @@
       <v-col cols="auto">
         <v-card-title class="d-flex text-sm-h5 text-h6 font-weight-bold pa-0"
           >DEV 트레이닝</v-card-title
-        > </v-col
-      ><v-col cols="auto" class="d-none d-sm-flex" align-self="center">
+        >
+      </v-col>
+      <v-col cols="auto" class="d-none d-sm-flex" align-self="center">
         <v-btn icon to="/DevTrainingPage" nuxt
           ><v-icon large color="black">{{ svgPath }}</v-icon></v-btn
-        ></v-col
-      >
+        >
+      </v-col>
     </v-row>
 
     <v-slide-group v-model="slideIndex" center-active mandatory>
@@ -29,6 +30,7 @@
           height="200"
           :width="cardWidth"
           elevation="2"
+          rounded="lg"
           class="ma-4 darken-2"
           @click="toggle"
         >
@@ -59,8 +61,8 @@
                 nuxt
                 >모아보기</v-btn
               ><v-btn
-                color="primary"
                 v-if="item.lastListSlug"
+                color="primary"
                 :to="{
                   name: 'DevTrainingPage-slug',
                   params: { slug: item.lastListSlug },
@@ -126,6 +128,12 @@ export default {
       }
     },
   },
+  created() {
+    this.joinFoundData().then((result) => {
+      this.reduceResult = result
+    })
+  },
+  mounted() {},
   methods: {
     slideSwipe(direction) {
       if (direction === 'Left') this.slideIndex++
@@ -163,13 +171,6 @@ export default {
       return result
     },
   },
-  created() {
-    this.joinFoundData().then((result) => {
-      this.reduceResult = result
-      console.log(this.reduceResult)
-    })
-  },
-  mounted() {},
 }
 </script>
 <style>

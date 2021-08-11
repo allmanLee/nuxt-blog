@@ -46,6 +46,7 @@
 <script>
 import { mdiViewGridOutline } from '@mdi/js'
 export default {
+  props: { resultListByTag: { type: String, default: undefined } },
   data() {
     return {
       svgPath: mdiViewGridOutline,
@@ -53,7 +54,7 @@ export default {
       navTags: ['javascript', 'html', 'css', 'git', 'nuxt', 'vue'],
     }
   },
-  props: ['resultListByTag'],
+
   computed: {
     cardWidth() {
       switch (this.$vuetify.breakpoint.name) {

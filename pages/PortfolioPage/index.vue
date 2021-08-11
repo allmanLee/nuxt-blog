@@ -11,9 +11,9 @@
       <v-window-item>
         <v-container>
           <v-row align="center" justify="center">
-            <v-col cols="auto">
+            <v-col cols="auto" order="2">
               <v-card-title
-                class="portfolio-title text-h4 font-weight-bold py-2"
+                class="portfolio-title text-sm-h4 text-h5 font-weight-bold py-2"
               >
                 하이브리드 어플리케이션<br />
                 HANTA - 게임팀 매칭
@@ -23,7 +23,7 @@
                 >Html, Css, OnsenUI, VUE, Cordova<br />
                 프로필카드로 간단하게 팀원을 찾아볼 수 있습니다.
               </v-card-subtitle>
-              <v-card-actions class="mt-14">
+              <v-card-actions class="mt-8">
                 <v-btn class="px-6" large dark rounded
                   ><v-icon>{{ githubIcon }}</v-icon></v-btn
                 >
@@ -32,45 +32,11 @@
                 >
               </v-card-actions>
             </v-col>
-            <v-col cols="auto" class="portfolio-box text-center">
+            <v-col cols="auto" order="1" class="portfolio-box text-center">
               <v-img
                 id="hantaImage1"
                 class="portfolio-img rounded-xl elevation-9 d-inline-block"
-                width="300px"
-                :src="require('~/assets/img/hanta-5.png')"
-              ></v-img>
-            </v-col>
-          </v-row>
-        </v-container>
-      </v-window-item>
-      <v-window-item>
-        <v-container>
-          <v-row align="center">
-            <v-col>
-              <v-card-title class="text-h4 font-weight-bold py-2">
-                하이브리드 어플리케이션<br />
-                HANTA - 게임팀 매칭
-              </v-card-title>
-              <v-card-subtitle class="justify-center mt-6 py-0"
-                >Html, Css, OnsenUI, VUE, Cordova
-              </v-card-subtitle>
-              <v-card-subtitle class="justify-center py-0">
-                프로필카드로 간단하게 팀원을 찾아볼 수 있습니다.
-              </v-card-subtitle>
-              <v-card-actions class="mt-14">
-                <v-btn class="px-6" large dark rounded
-                  ><v-icon>{{ githubIcon }}</v-icon></v-btn
-                >
-                <v-btn class="px-6 font-weight-bold" outlined large rounded
-                  >DEMO</v-btn
-                >
-              </v-card-actions>
-            </v-col>
-            <v-col class="portfolio-box text-center">
-              <v-img
-                id="hantaImage1"
-                class="portfolio-img rounded-xl elevation-9 d-inline-block"
-                width="300px"
+                :width="$vuetify.breakpoint.xs ? '200px' : '300px'"
                 :src="require('~/assets/img/hanta-5.png')"
               ></v-img>
             </v-col>
