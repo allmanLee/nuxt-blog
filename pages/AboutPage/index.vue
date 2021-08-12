@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="12" sm="6" class="pr-14">
+      <v-col>
         <h4>LEEYOUJUN</h4>
         <h1 class="mb-12">이유준</h1>
         <v-row justify="center">
