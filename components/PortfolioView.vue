@@ -12,7 +12,7 @@
             <v-row align="center" justify="center">
               <v-col>
                 <v-img
-                  lazy-src=""
+                  :height="$vuetify.breakpoint.name === 'xs' ? 200 : 600"
                   :src="require('../assets/img/bennerHanta.png')"
                 ></v-img>
               </v-col>
