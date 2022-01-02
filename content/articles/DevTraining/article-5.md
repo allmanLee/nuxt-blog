@@ -1,9 +1,9 @@
 ---
-title: git
+title: 기타
 description: 개인정보 동의서
 date: '2021-07-31'
 order: [개인정보 동의서]
-tags: [git]
+tags: [기타]
 ---
 
 <!-- 목차 -->
