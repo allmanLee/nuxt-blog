@@ -83,7 +83,7 @@
           mandatory
           active-class="text--accent-4"
         >
-          <v-list-item href="/nuxt-blog" nuxt value="home">
+          <v-list-item href="/" nuxt value="home">
             <v-list-item-icon color="purple"
               ><v-icon>{{ mdiHomeIcon }}</v-icon></v-list-item-icon
             >
